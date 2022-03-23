@@ -15,10 +15,13 @@ def luas_lingkaran(r: int, x: int):
         return {"r": r, "hasil": 22/7*r**2*x}
     return {"status": "error"}
 
-@app.post("/kali/")
+@app.post("/hasil-kali-ganjil/")
 def kali(a: Optional[int] = Form(...), b: Optional[int] = Form(...)):
     if a and b:
-        return {"a": a, "b": b, "pangkat-dua": a**b}
+        hasil_kali = a*b
+        if hasil_kali % 2 == 0:
+            return {"status": "genap", "number": hasil_kali}
+        return {"status": "ganjil", "number": hasil_kali}
     return {"status": "error"}
 
 @app.post("/pangkat/")
